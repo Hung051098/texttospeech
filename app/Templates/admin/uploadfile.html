@@ -1,0 +1,144 @@
+
+{% if current_user.is_authenticated %}
+{% extends 'admin/master.html' %}
+{% block content %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            <h1 class="h3 mb-3 text-gray-800">Chuyển file Word thành giọng nói</h1>
+
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tạo file audio</h6>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                {% if error %}
+                                <p class=error> {{ error }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="container mt-3">
+                                <h2>Tạo Audio</h2>
+                                <form action="/admin/upload" method="post" enctype="multipart/form-data">
+                                    <p>Tạo file:</p>
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="customFile" name="file">
+                                        <label class="custom-file-label" for="customFile">Chọn file</label>
+                                    </div>
+                                    <div class="row mt-2 mb-3">
+                                        <div class="col-lg-7 col-md-6">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select name="tts_ssml_volume" id="tts_ssml_volume"
+                                                        class="form-control mt-3">
+                                                        <option value="0" selected="selected">Âm lượng
+                                                            đầu ra: Măc định</option>
+                                                        <option value="-0.8">Âm lượng đầu ra: X-nhỏ
+                                                        </option>
+                                                        <option value="-0.5">Âm lượng đầu ra: Nhỏ</option>
+                                                        <option value="0">Âm lượng đầu ra: Bình thường
+                                                        </option>
+                                                        <option value="0.5">Âm lượng đầu ra: Lớn</option>
+                                                        <option value="1">Âm lượng đầu ra: X-lớn
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <select name="tts_ssml_spk_rate" id="tts_ssml_spk_rate"
+                                                        class="form-control mt-3">
+                                                        <option value="-50" selected="selected">Tỷ lệ
+                                                            nói: Default</option>
+                                                        <option value="-150">Tỷ lệ nói: X-Châm</option>
+                                                        <option value="-100">Tỷ lệ nói: Chậm</option>
+                                                        <option value="-50">Tỷ lệ nói: Bình thường</option>
+                                                        <option value="10">Tỷ lệ nói: Nhanh</option>
+                                                        <option value="20">Tỷ lệ nói: X-Nhanh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary">Tạo audio</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Thời gian</th>
+                                            <th>Audio</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Tên bài báo</th>
+                                            <th>Audio</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for item in listHistoty %}
+                                        <tr>
+                                            <td>{{item.create_date}}</td>
+                                            <td>
+                                                <audio controls>
+                                                  <source src="{{url_for('static',filename='assets/audio/')}}{{item.mp3}}" type="audio/ogg">
+                                                </audio>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="tts_listen_modal" data-backdrop="static" tabindex="-1" role="dialog"
+                        aria-labelledby="staticBackdrop" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Trình phát</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i aria-hidden="true" class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center mt-3 mb-3">
+                                            <audio controls="" id="tts_player" name="tts_player"></audio>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a id="tts_view_text" href="https://HeroBot.vn/tts/start" target="_blank"
+                                        class="btn btn-primary mr-2">Xem văn bản</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+<script>
+// Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
+{% endblock %}
+{%else%}
+    {% include 'admin/login.html' %}
+{% endif%}

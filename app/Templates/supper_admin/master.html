@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="shortcut icon" href="{{url_for('static',filename='assets//favicon.ico')}}" type="image/x-icon">
+
+    <title>Hero Bot Admin</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="{{url_for('static',filename='assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{url_for('static',filename='assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+
+</head>
+{%block body%}
+
+    {% if current_user.is_authenticated %}
+<body id="page-top">
+    <div id="wrapper">
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0)">
+<!--                <div class="sidebar-brand-icon">-->
+<!--                    <img src="{{url_for('static',filename='assets//pixlr-bg-result.png')}}" class="icon-view">-->
+<!--                </div>-->
+                <div class="sidebar-brand-text mx-3">Chuyển Văn Bản Thành Giọng Nói</div>
+            </a>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Bảng điều khiển </div>
+            <li class="nav-item"><a class="nav-link" href="/admin/home"><i
+                        class="fas fa-broadcast-tower"></i> <span>Bắt đầu</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/listpaper"><i class="fas fa-tag"></i>
+                    <span>Báo nói tuoitre.vn</span></a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/wiki">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tìm hiểu thế giới</span></a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/admin/upload"><i class="fas fa-tag"></i>
+                    <span>Chuyển đổi file word</span></a></li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fa fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </li>
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" id="keyword" name="keyword" class="form-control bg-light border-0 small"
+                                placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="https://HeroBot.vn/tts/start#" id="searchDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Tìm kiếm..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="https://HeroBot.vn/tts/start#" id="alertsDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell"></i>
+                            </a>
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Thông báo </h6>
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="https://HeroBot.vn/user/my_notification_view/0Yx2AMcg86f6e55761bc96a07674616bfe9bb0a25Ur95LGElP">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">2021-03-03 07:11:59</div>
+                                        <span class="font-weight-bold">Tăng mức ký tự lên 50.000 cho tài khoản của
+                                            bạn</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500"
+                                    href="https://HeroBot.vn/user/my_notification">Hiển thị tất cả thông báo</a>
+                            </div>
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Chào mừng, Em Hùng</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+<!--                                <a class="dropdown-item mb-2" href="https://HeroBot.vn/user/my_profile">-->
+<!--                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Thông tin </a>-->
+<!--                                <a class="dropdown-item mb-2" href="https://HeroBot.vn/user/change_password">-->
+<!--                                    <i class="fa fa-key fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Đổi mật khẩu </a>-->
+
+
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                    </ul>
+                    <div>
+<!--                        <div class="dropdown bootstrap-select form-control">-->
+<!--                            <select name="language_switcher"-->
+<!--                                id="language_switcher" class="form-control selectpicker" tabindex="-98">-->
+<!--                                <option value="English">English</option>-->
+<!--                                <option value="Vietnamese" selected="selected">Vietnamese</option>-->
+<!--                            </select>-->
+<!--                            <button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown"-->
+<!--                                role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false"-->
+<!--                                data-id="language_switcher" title="Vietnamese">-->
+<!--                                <div class="filter-option">-->
+<!--                                    <div class="filter-option-inner">-->
+<!--                                        <div class="filter-option-inner-inner">Vietnamese</div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </button>-->
+<!--                            <div class="dropdown-menu ">-->
+<!--                                <div class="inner show" role="listbox" id="bs-select-1" tabindex="-1">-->
+<!--                                    <ul class="dropdown-menu inner show" role="presentation"></ul>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </nav>
+
+                {% block content %}
+
+                {% endblock %}
+
+            </div>
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Rời trang?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Bạn có chắc chắn muốn đăng xuất.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="{{url_for('logout')}}">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>HeroBot v1.0.0</span>
+                    </div>
+                </div>
+            </footer>
+            <input type="hidden" name="global_base_url" id="global_base_url" value="https://HeroBot.vn/">
+            <input type="hidden" name="global_user_identifier" id="global_user_identifier"
+                value="dT80KEW2M7e2d0b5407eb2ff85b92767229bb8283yXEslaCqJ">
+            <input type="hidden" name="global_site_language" id="global_site_language" value="vietnamese">
+            <input type="hidden" name="global_caption" id="global_caption"
+                value="Xem||Chỉnh sửa||Xóa||Xóa||Bạn sẽ không thể hoàn nguyên điều này">
+            <input type="hidden" name="timezone_offset" id="timezone_offset" value="0">
+            <input type="hidden" name="user_dateformat" id="user_dateformat" value="Y-m-d">
+            <input type="hidden" name="user_timeformat" id="user_timeformat" value="H:i:s">
+        </div>
+    </div>
+    <a class="scroll-to-top rounded" href="https://HeroBot.vn/tts/start#wrapper" style="display: none;">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{url_for('static',filename='assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{url_for('static',filename='assets/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{url_for('static',filename='assets/js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{url_for('static',filename='assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static',filename='assets/js/demo/datatables-demo.js')}}"></script>
+    <script>
+        function play_example(ids) {
+            $("#tts_example_play_button_" + ids).attr("class", "far fa-stop-circle ml-2 text-gray-500 hand-cursor");
+            var audio = document.getElementById("tts_example_audio_" + ids);
+            $("#tts_example_audio_" + ids).on("ended", function() {
+                $("#tts_example_play_button_" + ids).attr("class", "far fa-play-circle ml-2 text-gray-500 hand-cursor");
+            });
+            audio.play();
+        }
+    </script>
+</body>
+
+</html></p>
+    {%else%}
+        {% include 'admin/login.html' %}
+    {% endif%}
+{%endblock%}

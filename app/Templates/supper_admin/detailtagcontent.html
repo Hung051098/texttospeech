@@ -1,0 +1,79 @@
+
+{% if current_user.is_authenticated %}
+{% extends 'admin/master.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 text-left">
+            <h1 class="h3 mb-3 text-gray-800">Chuyển văn bản thành giọng nói</h1>
+        </div>
+    </div>
+    <form method="post" action="/supperadmin/detailtagcontent?id={{data[0].id}}">
+        <div class="form-group">
+            <label for="">Domain</label>
+            <input type="text" name="text_domain" class="form-control" value="{{data[0].domain}}">
+        </div>
+        <div class="form-group">
+            <label for="">Thẻ 1</label>
+            <input type="text" name="text_tag" class="form-control" value="{{data[0].tag}}">
+        </div>
+        <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Loại</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" {% if data[0].type == 1 %}
+                     checked
+                        {%endif%} name="type" id="type" value="1">
+              <label class="form-check-label" >
+                Class
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" {% if data[0].type == 0 %}
+                     checked
+                        {%endif%} type="radio" name="type" id="type" value="0">
+              <label class="form-check-label" >
+                Id
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+        <div class="form-group">
+            <label for="">Định danh</label>
+            <input type="text"  name="text_class" class="form-control" value="{{data[0].class}}">
+        </div>
+        <div class="form-group">
+            <label for="">Thẻ Nội Dung</label>
+            <input type="text"  name="text_content" class="form-control" value="{{data[0].content}}">
+        </div>
+        <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Trạng thái</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" {% if data[0].status == '1' %}
+                     checked
+                        {%endif%} type="radio" name="gridRadios" id="gridRadios1" value="1">
+              <label class="form-check-label" >
+                Hoạt động
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" {% if data[0].status == '0' %} checked {% endif %}type="radio" name="gridRadios" id="gridRadios2" value="0">
+              <label class="form-check-label" >
+                Ngưng hoạt động
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+{%else%}
+    {% include 'admin/login.html' %}
+{% endif%}

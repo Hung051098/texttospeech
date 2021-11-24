@@ -1,0 +1,32 @@
+
+{% if current_user.is_authenticated %}
+{% extends 'admin/master.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 text-left">
+            <h1 class="h3 mb-3 text-gray-800">Chuyển văn bản thành giọng nói</h1>
+        </div>
+    </div>
+    <form method="post" action="/supperadmin/adduser">
+
+        <div class="form-group">
+            <label for="">Tên người dùng</label>
+            <input type="text" name="name" class="form-control" value="">
+        </div>
+        <div class="form-group">
+            <label for="">Tài khoản đăng nhập</label>
+            <input type="text"  name="username" class="form-control" value="">
+        </div>
+        <div class="form-group">
+            <label for="">Mật khẩu</label>
+            <input type="password"  name="password" class="form-control" value="">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+{%else%}
+    {% include 'admin/login.html' %}
+{% endif%}

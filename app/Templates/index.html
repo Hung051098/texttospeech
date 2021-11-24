@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)home -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hero Bot</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="Herobot, tts, text to speech, vbee, chuyen doi van ban thanh giong noi, chuyển đổi văn bản thành giọng nói tự động, ứng dụng text to speech, ung dung text to speech, ai tri tue nhan tao, giong noi thong minh">
+	<meta name="description" content="HeroBot cung cấp công nghệ chuyển văn bản thành tiếng nói Text-To-Speech (TTS) và hội thoại thông minh.">
+	<meta name="author" content="Hero Bot">
+	<link rel="shortcut icon" href="{{url_for('static',filename='assets//favicon.ico')}}" type="image/x-icon">
+    <link type="text/css"
+        href="assets/themes/default/front/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+        rel="stylesheet">
+	<link type="text/css" href="{{url_for('static',filename='assets/css/all.min.css')}}" rel="stylesheet">
+	<link type="text/css" href="{{url_for('static',filename='assets/css/prism.css')}}" rel="stylesheet">
+	<link type="text/css" href="{{url_for('static',filename='assets/css/front.css')}}" rel="stylesheet">
+	  </head>
+
+  <body>
+    <header class="header-global">
+      <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-theme-primary headroom--not-bottom headroom--pinned headroom--top">
+	    <div class="container">
+		  <a class="navbar-brand @@logo_classes" href="home/">
+		    <img class="navbar-brand-dark common" src="{{url_for('static',filename='assets/imglogo.png')}}" alt="Hero Bot logo">
+          </a>
+          <div class="navbar-collapse collapse" id="navbar_global">
+		    <div class="navbar-collapse-header">
+			  <div class="row">
+			    <div class="col-6 collapse-brand">
+				  <h2 class="font-weight-bolder">Hero Bot</h2>
+				</div>
+                <div class="col-6 collapse-close">
+				  <a href="home#navbar_global" role="button" class="fas fa-times" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"></a>
+                </div>
+              </div>
+            </div>
+            <ul class="navbar-nav navbar-nav-hover justify-content-center">
+              <li class="nav-item">
+			    <a id="menu_home" href="home/" class="nav-link"><b>Trang chủ</b></a>
+              </li>
+			                <li class="nav-item">
+			    <a id="menu_pricing" href="home/pricing" class="nav-link">Bảng giá</a>
+			  </li>
+			                <li class="nav-item dropdown">
+                <a href="home#" class="nav-link dropdown-toggle" aria-expanded="false" data-toggle="dropdown">
+                  <span id="menu_support" class="nav-link-inner-text mr-1">Hỗ trợ</span>
+                  <i class="fas fa-angle-down nav-link-arrow"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg">
+                  <div class="col-auto px-0" data-dropdown-content="">
+                    <div class="list-group list-group-flush">
+					                        <a href="home/faq" id="menu_faq" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                        <span class="icon icon-sm icon-secondary"><i class="fas fa-question-circle"></i></span>
+                        <div class="ml-4">
+                          <span class="text-dark d-block">Hỏi &amp; Đáp</span>
+                        </div>
+                      </a>
+					                        <a href="home/documentation" id="menu_documentation" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                        <span class="icon icon-sm icon-primary"><i class="fas fa-book"></i></span>
+                        <div class="ml-4">
+                          <span class="text-dark d-block">Tài liệu</span>
+                        </div>
+                      </a>
+					                      </div>
+                  </div>
+                </div>
+              </li>
+			                <li class="nav-item">
+			    <a id="menu_blog" href="blog" class="nav-link">Blog</a>
+			  </li>
+			                <li class="nav-item">
+			    <a id="menu_about" href="home/about" class="nav-link">Giới thiệu</a>
+              </li>
+              <li class="nav-item">
+			    <a id="menu_contact" href="home/contact" class="nav-link">Liên hệ</a>
+              </li>
+            </ul>
+          </div>
+          <div class="d-block @@cta_button_classes">
+		                  <a href="/login_admin" target="_blank" class="btn btn-md btn-docs btn-outline-white animate-up-2 mr-3"><i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập</a>
+              <a href="/register" target="_blank" class="btn btn-md btn-secondary animate-up-2"><i class="fas fa-user-plus mr-2"></i> Đăng ký</a>
+            		  </div>
+          <div class="d-flex d-lg-none align-items-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>      <section class="section-header pb-11 pb-lg-13 bg-primary text-white">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-10 text-center">
+              <h3 class="display-3 mb-4">Chuyển văn bản thành giọng nói ngay bây giờ</h3>
+              <p class="lead mb-5 px-lg-5">47 Ngôn ngữ, Hơn 200 giọng nói. Tải xuống MP3</p>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-7">
+              <form method="get" action="register" class="form-group mb-4">
+                <div class="d-flex flex-row justify-content-center">
+                  <div class="input-group">
+                    <input class="form-control form-control-xl border-light" name="email_address" id="email_address" placeholder="Địa chỉ email của bạn" type="email" required="">
+                    <div class="input-group-prepend">
+                      <button type="submit" class="btn btn-secondary rounded-right">Tạo tài khoản</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="pattern bottom"></div>
+      </section>
+      <div class="section pt-0">
+        <div class="container mt-n9 mt-lg-n12 z-2">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+              <div class="position-relative">
+                <img class="shadow-box rounded" src="{{url_for('static',filename='assets/png/preview.png')}}" alt="CyberBukit TTS preview">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+	  <section class="section section-lg line-bottom-light">
+	    <div class="container">
+          <div class="row justify-content-center mb-4 mb-lg-6">
+            <div class="col-12 text-center">
+              <h1 class="display-3 mb-3 mb-lg-4">Tại sao sử dụng dịch vụ của chúng tôi?</h1>
+              <p class="lead">47 ngôn ngữ, hơn 200 giọng nói truyền cảm</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <nav>
+                <div class="nav nav-tabs flex-column flex-md-row bg-white shadow-soft border border-light justify-content-around rounded mb-lg-3 py-3" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link rounded mr-md-3 active" id="nav-content-research-tab" data-toggle="tab" href="home#nav-content-research" role="tab" aria-controls="nav-content-research" aria-selected="true"><span class="d-block"><span class="fas fa-file-alt mr-2"></span><span class="font-weight-normal">Nhiều ngôn ngữ và giọng nói</span></span></a>
+                  <a class="nav-item nav-link rounded mr-md-3" id="nav-rank-track-tab" data-toggle="tab" href="home#nav-rank-track" role="tab" aria-controls="nav-rank-track" aria-selected="false"><span class="fas fa-chart-line mr-2"></span><span class="font-weight-normal">Giọng nói chuẩn và giọng nói AI</span></a>
+                  <a class="nav-item nav-link rounded mr-md-3" id="nav-web-monitor-tab" data-toggle="tab" href="home#nav-web-monitor" role="tab" aria-controls="nav-web-monitor" aria-selected="false"><span class="far fa-bell mr-2"></span><span class="font-weight-normal">Mô hình định giá linh hoạt</span></a>
+                </div>
+              </nav>
+              <div class="tab-content mt-5 mt-lg-6" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-content-research" role="tabpanel" aria-labelledby="nav-content-research-tab">
+                  <div class="row justify-content-between align-items-center">
+                    <div class="col-12 col-md-5">
+                      <h3 class="mb-4">Nhiều ngôn ngữ và giọng nói</h3>
+                      <p class="lead">Dịch vụ của chúng tôi bao gồm 47 ngôn ngữ và hơn 200 loại giọng nói và đang gia tăng liên tục. Chúng tôi tin rằng nó đáp ứng hầu hết các nhu cầu của bạn.</p>
+                      <a href="/register" class="my-4 mb-5 d-block font-weight-bold"><i class="fas fa-external-link-alt mr-2"></i>Tạo tài khoản ngay</a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <img class="shadow rounded" src="{{url_for('static',filename='assets/png/feature-illustration.svg')}}" alt="image">
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="nav-rank-track" role="tabpanel" aria-labelledby="nav-rank-track-tab">
+                  <div class="row justify-content-between align-items-center">
+                    <div class="col-12 col-md-5">
+                      <h3 class="mb-4">Giọng nói chuẩn và giọng nói AI</h3>
+                      <p class="lead">Chúng tôi hỗ trợ giọng nói chuẩn và giọng nói AI (Được gọi là Neural Voice). Với giọng nói chuẩn, bạn sẽ có chi phí thấp hơn. Với giọng nói AI, bạn có giọng nói trôi chảy hơn.</p>
+                      <a href="/register" class="my-4 mb-5 d-block font-weight-bold"><i class="fas fa-external-link-alt mr-2"></i>Tạo tài khoản ngay</a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <img class="shadow rounded" src="{{url_for('static',filename='assets/png/feature-illustration-2.svg')}}" alt="image">
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="nav-web-monitor" role="tabpanel" aria-labelledby="nav-web-monitor-tab">
+                  <div class="row justify-content-between align-items-center">
+                    <div class="col-12 col-md-5">
+                      <h3 class="mb-4">Mô hình định giá linh hoạt</h3>
+                      <p class="lead">Chúng tôi cung cấp các mô hình định giá Pay-As-You-Go, Trọn gói, Đăng ký. Bạn có thể thanh toán qua Paypal hoặc Thẻ tín dụng và bắt đầu với chi phí thấp.</p>
+                      <a href="/register" class="my-4 mb-5 d-block font-weight-bold"><i class="fas fa-external-link-alt mr-2"></i>Tạp tài khoản ngay</a>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <img class="shadow rounded" src="{{url_for('static',filename='assets/png/hero-illustration.svg')}}" alt="image">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-lg bg-primary text-white">
+        <div class="container">
+          <div class="row justify-content-center mb-5 mb-lg-6">
+            <div class="col-12 text-center">
+              <h2 class="h1 px-lg-5">Sản xuất nội dung tự động với HeroBot?</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div class="px-3 px-lg-4 py-5 text-center">
+                  <span class="icon icon-lg mb-4"><i class="fas fa-users"></i></span>
+                  <h5 class="font-weight-normal text-primary">Sáng tạo nội dung</h5>
+                  <p>Chuyển văn bản thành giọng nói giúp nội dung của bạn dễ tiếp cận hơn.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div class="px-3 px-lg-4 py-5 text-center">
+                  <span class="icon icon-lg mb-4"><i class="fab fa-servicestack"></i></span>
+                  <h5 class="font-weight-normal text-primary">Sách, truyện nói</h5>
+                  <p>Chuyển sách, truyện văn bản thành sách, truyện nói, giúp lựa chọn, chuyển đổi nội dung và phát các cuốn sách, truyện yêu thích thay vì phải đọc như truyền thống.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div class="px-3 px-lg-4 py-5 text-center">
+                  <span class="icon icon-lg mb-4"><i class="fas fa-money-check-alt"></i></span>
+                  <h5 class="font-weight-normal text-primary">Thuyết minh phim</h5>
+                  <p>Hỗ trợ lồng tiếng thuyết minh phim hoàn toàn tự động và trong thời gian ngắn</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div class="px-3 px-lg-4 py-5 text-center">
+                  <span class="icon icon-lg mb-4"><i class="fas fa-users"></i></span>
+                  <h5 class="font-weight-normal text-primary">Thu âm bài học</h5>
+                  <p>Chuyển nội dung các bài học, bài thuyết trình, bài giảng... thành dạng âm thanh để nâng cao chất lượng giảng dạy, giúp tất cả các học viên đều nắm và ghi nhớ được nội dung bài học. Có thể ứng dụng trong các lớp học, các buổi họp dành cho học sinh khiếm thị, hạn chế khả năng tiếp nhận thông tin...</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div class="px-3 px-lg-4 py-5 text-center">
+                  <span class="icon icon-lg mb-4"><i class="fab fa-servicestack"></i></span>
+                  <h5 class="font-weight-normal text-primary">Thu âm lời chào tổng đài</h5>
+                  <p>Với lợi thế phát triển nhiều giọng nam, nữ, đa dạng vùng miền, có chức năng chèn nhạc nền tự chọn và điều chỉnh được tốc độ đọc, giúp các doanh nghiệp dễ dàng sở hữu một lời chào dành cho tổng đài, hoàn toàn tự động chỉ trong vài phút mà không cần thu âm. Ứng dụng trong các tổng đài chăm sóc khách hàng, tổng đài tra cứu thông tin...</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card bg-white shadow-soft text-primary rounded mb-4">
+                <div class="px-3 px-lg-4 py-5 text-center">
+                  <span class="icon icon-lg mb-4"><i class="fas fa-money-check-alt"></i></span>
+                  <h5 class="font-weight-normal text-primary">Tạo clip Youtube</h5>
+                  <p>Giúp các Youtuber dễ dàng chuyển các đoạn tin tức, sách báo, truyện, nội dung... thành các tệp âm thanh để lồng ghép vào video của mình mà không cần lo lắng về thời gian và chi phí thu âm, lồng ghép giọng nói.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-lg line-bottom-soft">
+        <div class="container">
+          <div class="row justify-content-center mb-5 mb-lg-7">
+            <div class="col-12 col-md-8 text-center">
+              <h1 class="h1 font-weight-bolder mb-4">Lời chứng thực của khách hàng</h1>
+              <p class="lead">Sản phẩm của chúng tôi được người dùng trên toàn thế giới yêu thích</p>
+            </div>
+          </div>
+          <div class="row mb-lg-5">
+            <div class="col-12 col-lg-6">
+              <div class="customer-testimonial d-flex mb-5">
+                <img src="{{url_for('static',filename='assets/png/profile-picture-1.jpg')}}" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                  <div class="d-flex mb-4">
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                  </div>
+                  <p class="mt-2">"Công cụ chuyển văn bản thành giọng nói này giúp tiết kiệm một ngày của tôi và thúc đẩy công việc kinh doanh của tôi rất nhiều..."</p>
+                  <span class="h6">- Hưng Nguyễn <small class="ml-0 ml-md-2">Quản lý truyền thông</small></span>
+                </div>
+              </div>
+              <div class="customer-testimonial d-flex mb-5">
+                <img src="{{url_for('static',filename='assets/png/profile-picture-2.jpg')}}" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                  <div class="d-flex mb-4">
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                  </div>
+                  <p class="mt-2">"Tôi đã từng khao khát có một công cụ như thế này, và nó đã trở thành hiện thực khi tôi biết đến HeroBot..."</p>
+                  <span class="h6">- Trần Tuấn <small class="ml-0 ml-md-2">Sản xuất video</small></span>
+                </div>
+              </div>
+            </div>
+			<div class="col-12 col-lg-6 pt-lg-6">
+			  <div class="customer-testimonial d-flex mb-5">
+			    <img src="{{url_for('static',filename='assets/png/profile-picture-4.jpg')}}" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                  <div class="d-flex mb-4">
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                  </div>
+                  <p class="mt-2">"Tôi là một Tiktoker, tôi rất cần HeroBot để sản xuất nội dung mà không cần tốn tiền thuê MC..."</p>
+                  <span class="h6">- Mạnh Thắng <small class="ml-0 ml-md-2">TikToker</small></span>
+                </div>
+              </div>
+			  <div class="customer-testimonial d-flex mb-5">
+			    <img src="{{url_for('static',filename='assets/png/profile-picture-6.jpg')}}" class="image image-sm mr-3 rounded-circle shadow" alt="">
+                <div class="content bg-soft shadow-soft border border-light rounded position-relative p-4">
+                  <div class="d-flex mb-4">
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                    <span class="text-warning mr-2"><i class="star fas fa-star"></i></span>
+                  </div>
+                  <p class="mt-2">"Tôi đã phải thốt lên rằng, HeroBot quá đỉnh khi tạo ra phần mềm này..."</p>
+                  <span class="h6">- Đình Tỉnh <small class="ml-0 ml-md-2">Content Marketing</small></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-lg pb-5 bg-soft">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center mb-5">
+              <h2 class="mb-4">Theo dõi chúng tôi</h2>
+			  <p class="lead mb-5">Nhận thông tin mới nhất từ ​​nền tảng truyền thông xã hội của chúng tôi</p>
+              			  <a href="https://www.facebook.com/HeroBotOfficial" target="_blank" class="icon icon-lg text-gray mr-5">
+                <i class="fab fa-facebook"></i>
+              </a>
+                          </div>
+          </div>
+        </div>
+      </section>
+      <footer class="footer section pt-6 pt-md-8 pt-lg-10 pb-3 bg-primary text-white overflow-hidden">
+	    <div class="pattern pattern-soft top"></div>
+		<div class="container">
+		  <div class="row">
+		    <div class="col-lg-4 mb-4 mb-lg-0">
+              <a class="footer-brand mr-lg-5 d-flex" href="home">
+                <img src="{{url_for('static',filename='assets/imglogo.png')}}" height="35" class="mr-3" alt="Footer logo">
+              </a>
+              <p class="my-4"><a href="home/about">Hero Bot là côn...</a></p>
+              <div class="dropdown mb-4 mb-lg-0">
+				<a id="langsDropdown" href="home#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle footer-language-link">Vietnamese<i class="fas fa-chevron-down ml-1"></i></a>
+                <div aria-labelledby="langsDropdown" class="dropdown-menu dropdown-menu-center">
+                  <a id="language_english" href="generic/switchLang/english" class="dropdown-item text-gray text-sm">English</a><a id="language_vietnamese" href="generic/switchLang/vietnamese" class="dropdown-item text-gray text-sm">Vietnamese</a>                </div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3 col-lg-2 mb-4 mb-lg-0">
+              <h6><b>Hỗ trợ</b></h6>
+              <ul class="links-vertical">
+			                      <li><a href="home/faq">FAQ</a></li>
+				                  <li><a href="home/documentation">Tài liệu</a></li>
+                				<li><a href="home/contact">Liên hệ</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-3 col-lg-2 mb-4 mb-lg-0">
+              <h6><b>Liên kết</b></h6>
+              <ul class="links-vertical">
+			                    <li><a target="_blank" href="/login_admin">Đăng nhập</a></li>
+				                <li><a target="_blank" href="">Đăng ký</a></li>
+				                <li><a target="_blank" href="">Quên mật khẩu</a></li>
+				              </ul>
+			</div>
+			<div class="col-12 col-sm-6 col-lg-4">
+			                  <h6>Đăng ký</h6>
+                <p class="font-small">Tin tức, bài báo và tài nguyên mới nhất, được gửi thẳng đến hộp thư đến của bạn hàng tháng.</p>
+                  <form action="home/subscriber_action" method="POST" accept-charset="utf-8">
+                                                                                                    <input type="hidden" name="csrf_test_name" value="73402f5f702d148cec4df5382744965e">
+			        <div class="form-row">
+				      <div class="col-8">
+				        <input type="email" name="email_address" id="email_address" class="form-control mb-2" placeholder="Địa chỉ email" required="">
+                      </div>
+                      <div class="col-4">
+					    <button type="submit" class="btn btn-secondary btn-block"><span>Đăng ký</span></button>
+                      </div>
+                    </div>
+                  </form>                <small class="mt-2 form-text">We’ll never share your details. See our <a href="generic/terms_conditions" target="_blank" class="font-weight-bold text-underline">Điều khoản và điều kiện</a></small>
+			  			</div>
+          </div>
+          <hr class="my-4 my-lg-5">
+		  <div class="row">
+			<div class="col pb-4 mb-md-0">
+              <div class="d-flex text-center justify-content-center align-items-center">
+                <p class="font-weight-normal mb-0">© Hero Bot <span class="current-year">2021</span>. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+	  </footer>
+    </main>
+
+		<input type="hidden" name="global_base_url" id="global_base_url" value="">
+	<input type="hidden" name="global_language" id="global_language" value="vietnamese">
+	<input type="hidden" name="global_current_class" id="global_current_class" value="home">
+	<input type="hidden" name="global_current_method" id="global_current_method" value="index">
+
+	<script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/539Evs44yecoSf-lkJBQzKKj/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-zjc7xTV/N/5xk7fBfl7Yk+Q37duEHBt4X3RleHe4j+AH4qq5QE4gTkWU4vCAoECz"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/popper.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/headroom.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/on-screen.umd.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/jquery.waypoints.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/jarallax.min.js')}}"></script>
+	<script src="{{url_for('static',filename='assets/js/smooth-scroll.polyfills.min.js')}}"></script>
+	<script async="" defer="" src="{{url_for('static',filename='assets/jsbuttons.js')}}"></script>
+	<script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+    <input type="hidden" id="google_analytics_id" name="google_analytics_id" value="G-1XT6LX9RS2">
+		<script src="{{url_for('static',filename='assets/js/front.js')}}"></script>
+    <script src="https://kit.fontawesome.com/850c1fa0c2.js" crossorigin="anonymous"></script>
+
+</body></html>

@@ -1,0 +1,236 @@
+
+
+{% if current_user.is_authenticated %}
+{% extends 'admin/master.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <h1 class="h3 mb-3 text-gray-800">Chuyển văn bản thành giọng nói</h1>
+                <p class="mb-4"><b>Sự thật là :</b> Bạn đã sử dụng <i><b>0</b></i> ký tự để xem trước,
+                    <i><b>0</b></i> ký tự cho sản xuất. và tạo ra <i><b>0</b></i> tập tin thoại.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Chuyển văn bản thành giọng nói</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="/chuyen_thanh_giong_noi" method="POST" id="tts_start"
+                            name="tts_start" accept-charset="utf-8">
+                            <input type="hidden" name="csrf_test_name"
+                                value="921cb886cb9ff2b2074ebc17e1155a81">
+                            <input type="hidden" id="ttsc_preview_delay" name="ttsc_preview_delay"
+                                value="4">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="row mb-4">
+                                        <div class="col-lg-12">
+                                            <label><b>Ngôn ngữ</b></label>
+                                            <select name="tts_language" id="tts_language"
+                                                class="form-control">
+                                                {% for item in listLanguage %}
+                                                <option value="{{item.code}}" {% if item.code == 'vi' %} selected {%endif%}>{{item.name}}</option>
+                                                {%endfor%}
+                                            </select>
+                                            <input type="hidden" name="tts_hidden_current_language_hidden"
+                                                id="tts_hidden_current_language" value="vi-VN">
+                                            <input type="hidden" name="maximum_characters_notice"
+                                                id="maximum_characters_notice" value="Giới hạn ký tự là ">
+                                            <input type="hidden" name="tts_ssml_mode" id="tts_ssml_mode"
+                                                value="0">
+                                            <input type="hidden" name="tts_text_input_position"
+                                                id="tts_text_input_position">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-lg-12">
+                                            <label><b>Chất giọng</b></label>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <select name="tts_engine" id="tts_engine_standard"
+                                                class="form-control" onchange="check()">
+                                                <option value="standard">Tiêu chuẩn</option>
+                                                <option value="neural_2">Giọng nói AI</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row"  id="giong" style="display:none">
+                                        <div class="col-lg-12">
+                                            <label><b>Kiểu giọng</b></label>
+                                        </div>
+                                        <div id="tts_voice_list" class="col-lg-12">
+                                            <div class="row">
+                                                {% for item in listVoice %}
+                                                <div class="col-lg-12">
+                                                    <input type="radio" id="radio_tts_resource_ids" name="tts_resource_ids" value="{{item.data_name}}" class="mr-2 mb-3" /><label for="radio_wi7YNMgLI57f25848080fe4af61dc645ca3ad5285m7QJjeLsX">
+                                                    {{item.name}}
+                                                    </label>
+                                                    <audio id="tts_example_audio_{{item.data_id}}" src="{{url_for('static',filename='assets/voicedemo/')}}{{item.mp3}}"></audio>
+                                                    <span>
+                                                        <i id="tts_example_play_button_{{item.data_id}}" onclick="play_example('{{item.data_id}}')" class="far fa-play-circle ml-2 text-gray-500 hand-cursor"></i>
+                                                    </span><br/>
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <label><b class="mr-3">Văn bản để chuyển thành giọng nói</b></label>
+                                    <textarea name="tts_text" cols="40" rows="17" id="tts_text"
+                                        class="form-control"
+                                        placeholder="Nhập văn bản của bạn vào đây..."> Chào mừng bạn đến với Hero bot</textarea>
+                                    <div class="row mt-1">
+                                        <div class="col-lg-6">
+                                            <small><span id="tts_text_used">0</span> characters used, up to
+                                                <span id="tts_text_character_limit">3000</span>
+                                                characters</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mb-3">
+                                        <div class="col-lg-7 col-md-6">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <select name="tts_ssml_volume" id="tts_ssml_volume"
+                                                        class="form-control mt-3">
+                                                        <option value="0" selected="selected">Âm lượng
+                                                            đầu ra: Măc định</option>
+                                                        <option value="-0.8">Âm lượng đầu ra: X-nhỏ
+                                                        </option>
+                                                        <option value="-0.5">Âm lượng đầu ra: Nhỏ</option>
+                                                        <option value="0">Âm lượng đầu ra: Bình thường
+                                                        </option>
+                                                        <option value="0.5">Âm lượng đầu ra: Lớn</option>
+                                                        <option value="1">Âm lượng đầu ra: X-lớn
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <select name="tts_ssml_spk_rate" id="tts_ssml_spk_rate"
+                                                        class="form-control mt-3">
+                                                        <option value="-50" selected="selected">Tỷ lệ
+                                                            nói: Default</option>
+                                                        <option value="-150">Tỷ lệ nói: X-Châm</option>
+                                                        <option value="-100">Tỷ lệ nói: Chậm</option>
+                                                        <option value="-50">Tỷ lệ nói: Bình thường</option>
+                                                        <option value="0">Tỷ lệ nói: Nhanh</option>
+                                                        <option value="50">Tỷ lệ nói: X-Nhanh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-6 text-right">
+                                            <input type="hidden" name="synthesize_type" id="synthesize_type"
+                                                value="save">
+                                            <input type="submit" name="tts_btn_synthesize_to_file"
+                                                value="Chuyển thành giọng nói" id="tts_btn_synthesize_to_file"
+                                                class="btn btn-success mt-3 mr-1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách lịch sử chuyển đổi</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>File mp3</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>File mp3</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for item in data %}
+                            <tr>
+                                <td>{{item.time}}</td>
+                                <td>
+                                    <audio controls>
+                                      <source src="{{url_for('static',filename='assets/audio/')}}{{item.mp3}}" type="audio/ogg">
+                                      <source src="" type="audio/mpeg">
+                                    </audio>
+                                </td>
+                                <td>
+                                    <a href="detailhistory?id_history={{item.id}}" class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span class="text">Chi tiết</span>
+                                    </a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="tts_listen_modal" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="staticBackdrop" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Trình phát</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center mt-3 mb-3">
+                                <audio controls="" id="tts_player" name="tts_player"></audio>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="tts_view_text" href="https://HeroBot.vn/tts/start" target="_blank"
+                            class="btn btn-primary mr-2">Xem văn bản</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<!--</div>-->
+<script>
+    function check()
+    {
+        var tts_engine_standard = $('#tts_engine_standard').val()
+        if(tts_engine_standard == "neural_2")
+        {
+            $("#giong").css("display", "");
+            $('#radio_tts_resource_ids').attr("required", "required")
+        }
+        else{
+            document.querySelector('#radio_tts_resource_ids').required = false;
+            $("#giong").css("display", "none");
+        }
+
+    }
+</script>
+{% endblock %}
+{%else%}
+    {% include 'admin/login.html' %}
+{% endif%}

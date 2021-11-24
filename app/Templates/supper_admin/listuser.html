@@ -1,0 +1,62 @@
+
+{% if current_user.is_authenticated and  (role == 1 or role == 2) %}
+{% extends 'admin/master.html' %}
+{% block content %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên người dùng</th>
+                                            <th>Tài khoản đăng nhập</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Token Api</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Tên người dùng</th>
+                                            <th>Tài khoản đăng nhập</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Token Api</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for item in listuser %}
+                                        <tr>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.username}}</td>
+                                            <td>{{item.create_date}}</td>
+                                            <td>{{item.token_api}}</td>
+                                            <td>
+                                                <a href="detailuser?id_user={{item.id}}" class="btn btn-primary btn-icon-split">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-eye"></i>
+                                                    </span>
+                                                    <span class="text">Chi tiết</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+{% endblock %}
+{%else%}
+    {% include 'admin/login.html' %}
+{% endif%}

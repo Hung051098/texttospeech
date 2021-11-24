@@ -1,0 +1,89 @@
+
+{% if current_user.is_authenticated %}
+{% extends 'admin/master.html' %}
+{% block content %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            <h1 class="h3 mb-3 text-gray-800">Báo nói</h1>
+
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên bài báo</th>
+                                            <th>URL</th>
+                                            <th>Audio</th>
+                                            <th>
+                                                <a style="margin-left: 50px;" href="/get_content_url" class="btn btn-success btn-icon-split">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                    <span class="text">Lấy nội dung bài báo</span>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Tên bài báo</th>
+                                            <th>URL</th>
+                                            <th>Audio</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for item in data %}
+                                        <tr>
+                                            <td>{{item.title}}</td>
+                                            <td> <a href=" https://tuoitre.vn{{item.url}}" target="_blank"> https://tuoitre.vn{{item.url}}</a></td>
+                                            <td>
+                                                <a class="btn btn-primary btn-icon-split" onclick="generate_audio('https://tuoitre.vn{{item.url}}', '#result{{item.id}}', {{item.id}})">
+                                                    <span class="text">Nghe</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <div class="col-lg-12">
+                                                    <audio class="react-audio-player " controls="" id="result{{item.id}}" preload="metadata" src=""><p>Your browser does not support the <code>audio</code> element.</p></audio>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+<script !src="">
+
+    function generate_audio(url_paper, id_result, id)
+    {
+        $.ajax({
+            url: '/admin/crawpaper',
+            data: {url:url_paper, id:id},
+            type: 'POST',
+            beforeSend: function() {
+              loadding()
+            },
+            success: function(response) {
+                console.log("/"+response);
+                $(id_result).attr("src", "/"+response)
+                $("#loadMe").modal("hide");
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+{% endblock %}
+{%else%}
+    {% include 'admin/login.html' %}
+{% endif%}
